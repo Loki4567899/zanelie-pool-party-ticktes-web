@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0066cc">
+  <title>Zanelie Pool Party | Get Tickets</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">ZANELIE<span>.</span></div>
+    <a href="#tickets" class="nav-btn">Get Tickets</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-image">
+      <img src="poster.jpg" alt="Zanelie Pool Party Poster">
+    </div>
+
+    <div class="hero-content">
+      <p class="tag">21 NOVEMBER • POOL PARTY</p>
+      <h1>GOOD VIBES.<br><span>ONLY.</span></h1>
+      <p>Sun, swimming, music and unforgettable memories.</p>
+      <a href="#tickets" class="main-btn">GET YOUR TICKET →</a>
+    </div>
+  </header>
+
+  <section class="details">
+    <div class="detail">
+      <span>DATE</span>
+      <h2>21 NOV</h2>
+    </div>
+    <div class="detail">
+      <span>TIME</span>
+      <h2>12 PM</h2>
+      <p>Till Mama Calls</p>
+    </div>
+    <div class="detail">
+      <span>ADMISSION</span>
+      <h2>$15</h2>
+      <p>Per person</p>
+    </div>
+  </section>
+
+  <section class="activities">
+    <p class="tag">THE EXPERIENCE</p>
+    <h2>What's waiting for you?</h2>
+
+    <div class="activity-grid">
+      <div>🏊 Swimming</div>
+      <div>🎵 Music</div>
+      <div>🍔 Food</div>
+      <div>🍹 Drinks</div>
+      <div>🎮 Games</div>
+      <div>🎁 Surprise Guest</div>
+    </div>
+  </section>
+
+  <section class="tickets" id="tickets">
+    <p class="tag">SECURE YOUR SPOT</p>
+    <h2>Get Your Ticket</h2>
+    <p class="sub">Limited spots. Don't miss the party.</p>
+
+    <div class="ticket-card">
+      <div class="ticket-top">
+        <p>GENERAL ADMISSION</p>
+        <h1>$15</h1>
+        <span>ONE PERSON • ONE TICKET</span>
+      </div>
+
+      <form id="ticketForm">
+        <label>Full Name</label>
+        <input id="customerName" type="text" placeholder="Enter your full name" required>
+
+        <label>Phone Number</label>
+        <input id="customerPhone" type="tel" placeholder="Your WhatsApp number" required>
+
+        <label>Number of Tickets</label>
+        <input id="ticketQuantity" type="number" min="1" max="20" value="1" required>
+
+        <label>Payment Method</label>
+        <select id="paymentMethod" required>
+          <option value="manual">Manual Payment</option>
+          <option value="online">Online Payment</option>
+        </select>
+
+        <div class="total">
+          <span>Total Amount</span>
+          <strong id="totalAmount">$15.00</strong>
+        </div>
+
+        <button type="submit" class="buy-btn">CONTINUE TO CHECKOUT →</button>
+      </form>
+
+      <p class="secure">✓ Ticket requests are subject to payment confirmation.</p>
+    </div>
+  </section>
+
+  <section class="dress-code">
+    <h2>Dress Code</h2>
+    <p>Dress like a mobster and party like a boss.</p>
+    <p>Swimwear & bad vibes? NEVER.</p>
+  </section>
+
+  <footer>
+    <h2>ZANELIE POOL PARTY</h2>
+    <p>Snitches don't get invites.</p>
+    <p>Security tight & vibes tighter.</p>
+    <small>© 2026 Zanelie Pool Party. All rights reserved.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,96 +1,81 @@
 
-// =====================================
-// ZANELIE POOL PARTY - WEBSITE SETTINGS
-// =====================================
-
-// Replace with the organiser's WhatsApp number.
-// Zimbabwe example: 263771234567
-const WHATSAPP_NUMBER = "263771234567";
-
-// Add your real Paynow hosted checkout URL here
-// Leave empty until payment integration is configured.
-const PAYNOW_CHECKOUT_URL = "";
-
-// Ticket price
 const TICKET_PRICE = 15;
 
-// =====================================
-// TICKET CALCULATIONS
-// =====================================
+const CONTACTS = {
+  kudzai: {
+    name: "Kudzai N",
+    phone: "263781643997"
+  },
+  shantel: {
+    name: "Shantel R",
+    phone: "263789524694"
+  }
+};
 
+// Update total
 const quantity = document.getElementById("ticketQuantity");
 const total = document.getElementById("totalAmount");
 
 function updateTotal() {
-  let count = Number(quantity.value);
-
-  if (!Number.isInteger(count) || count < 1) {
-    count = 1;
-  }
-
-  if (count > 20) {
-    count = 20;
-  }
-
+  let count = Math.min(20, Math.max(1, Number(quantity.value) || 1));
   total.textContent = "$" + (count * TICKET_PRICE).toFixed(2);
 }
 
 quantity.addEventListener("input", updateTotal);
 
-// =====================================
-// CHECKOUT
-// =====================================
-
-document.getElementById("ticketForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+// Booking system
+document.getElementById("ticketForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
   const name = document.getElementById("customerName").value.trim();
   const phone = document.getElementById("customerPhone").value.trim();
   const count = Number(quantity.value);
   const method = document.getElementById("paymentMethod").value;
+  const recipientId = document.getElementById("paymentRecipient").value;
 
-  if (!name || !phone) {
-    alert("Please complete all your details.");
+  if (!name || !phone || !Number.isInteger(count) || count < 1 || count > 20) {
+    alert("Please check your details and ticket quantity.");
     return;
   }
 
-  if (!Number.isInteger(count) || count < 1 || count > 20) {
-    alert("Please choose between 1 and 20 tickets.");
+  const recipient = CONTACTS[recipientId];
+
+  if (!recipient) {
+    alert("Please select a payment recipient.");
     return;
   }
 
   const amount = (count * TICKET_PRICE).toFixed(2);
 
-  const message =
-    "ZANELIE POOL PARTY - TICKET REQUEST\n\n" +
-    "Name: " + name + "\n" +
-    "Phone: " + phone + "\n" +
-    "Tickets: " + count + "\n" +
-    "Total: $" + amount + "\n" +
-    "Payment: " + method + "\n\n" +
-    "Please assist me with my ticket purchase.";
-
-  if (method === "manual") {
-    if (WHATSAPP_NUMBER === "263771234567") {
-      alert("Please configure the organiser's WhatsApp number in script.js first.");
-      return;
-    }
-
-    const url = "https://wa.me/" + WHATSAPP_NUMBER +
-      "?text=" + encodeURIComponent(message);
-
-    window.open(url, "_blank");
+  if (method === "online") {
+    alert(
+      "Online card checkout is not connected yet. " +
+      "Please select EcoCash Transfer for now."
+    );
     return;
   }
 
-  if (method === "online") {
-    if (!PAYNOW_CHECKOUT_URL) {
-      alert("Online checkout is not configured yet. Please contact the organiser or choose Manual Payment.");
-      return;
-    }
+  const message =
+    "HELLO! I WANT TO BOOK ZANELIE POOL PARTY TICKETS.\n\n" +
+    "CUSTOMER DETAILS\n" +
+    "Name: " + name + "\n" +
+    "WhatsApp: " + phone + "\n\n" +
+    "BOOKING DETAILS\n" +
+    "Tickets: " + count + "\n" +
+    "Price per ticket: $15\n" +
+    "TOTAL: $" + amount + "\n\n" +
+    "PAYMENT DETAILS\n" +
+    "Recipient: " + recipient.name + "\n" +
+    "EcoCash Number: + " + recipient.phone + "\n\n" +
+    "Please send me the payment instructions. " +
+    "I will send my payment confirmation here.\n\n" +
+    "STATUS: PENDING PAYMENT";
 
-    // Configure a secure server-side Paynow checkout
-    // before connecting this hosted checkout URL.
-    window.location.href = PAYNOW_CHECKOUT_URL;
-  }
+  const whatsappURL =
+    "https://wa.me/" + recipient.phone +
+    "?text=" + encodeURIComponent(message);
+
+  window.location.href = whatsappURL;
 });
+
+updateTotal();
